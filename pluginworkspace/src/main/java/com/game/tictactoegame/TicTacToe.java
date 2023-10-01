@@ -55,7 +55,6 @@ public class TicTacToe {
         for (int x = 0; x < xlength; x++) {
             for(int y = 0; y < ylength; y++) {
                 Text t = new Text();
-                Hyperlink h = new Hyperlink();
                 String i;
                 if (gametable[x][y] == TicTacToe.PLAYER_X) {
                     i = " X ";

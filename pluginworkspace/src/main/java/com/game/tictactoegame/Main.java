@@ -7,8 +7,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,6 +37,9 @@ public class Main extends Application {
     @FXML
     private void initialize(){
         ticTacToe = new TicTacToe(3, 3);
+        ticTacToe.setGametable(0, 0, TicTacToe.PLAYER_X);
+        ticTacToe.setGametable(0, 1, TicTacToe.PLAYER_X);
+        ticTacToe.setGametable(0, 2, TicTacToe.PLAYER_X);
 
         GridPane tictactoegrid = new GridPane();
         tictactoegrid.setGridLinesVisible(true);
@@ -45,12 +50,17 @@ public class Main extends Application {
         ticTacToe.displayGametable(tictactoegrid);
         gametable.getChildren().add(tictactoegrid);
 
+        Text t = new Text();
+        GridPane label = new GridPane();
+
         if (ticTacToe.isWin() == TicTacToe.PLAYER_X) {
-            System.out.print("Player X");
+            t.setText("Player X");
         } else if (ticTacToe.isWin() == TicTacToe.PLAYER_O) {
-            System.out.print("Player O");
+            t.setText("Player O");
         } else {
-            System.out.print("No Player");
+            t.setText("No Player");
         }
+        label.add(t, 0, 0);
+        gametable.getChildren().add(label);
     }
 }
