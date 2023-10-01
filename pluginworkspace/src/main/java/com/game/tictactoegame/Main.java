@@ -3,6 +3,9 @@ package com.game.tictactoegame;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -17,7 +20,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gamedisplay.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -33,19 +35,25 @@ public class Main extends Application {
     @FXML
     private void initialize(){
         ticTacToe = new TicTacToe(3, 3);
-        ticTacToe.setGametable(0,0,TicTacToe.PLAYER_X);
-        ticTacToe.setGametable(1,1, TicTacToe.PLAYER_X);
-        ticTacToe.setGametable(2, 2, TicTacToe.PLAYER_X);
-        ticTacToe.setGametable(0, 1, TicTacToe.PLAYER_O);
-        ticTacToe.setGametable(1, 0, TicTacToe.PLAYER_O);
+        ticTacToe.setGametable(0,2,TicTacToe.PLAYER_O);
+        ticTacToe.setGametable(1, 1, TicTacToe.PLAYER_O);
+        ticTacToe.setGametable(2, 0, TicTacToe.PLAYER_O);
+
+        GridPane tictactoegrid = new GridPane();
+        tictactoegrid.setGridLinesVisible(true);
+        tictactoegrid.setCursor(Cursor.CROSSHAIR);
+        tictactoegrid.setScaleX(3);
+        tictactoegrid.setScaleY(3);
+        tictactoegrid.setPadding(new Insets(100, 100, 100, 100));
+        ticTacToe.displayGametable(tictactoegrid);
+        gametable.getChildren().add(tictactoegrid);
+
         if (ticTacToe.isWin() == TicTacToe.PLAYER_X) {
             System.out.print("Player X");
         } else if (ticTacToe.isWin() == TicTacToe.PLAYER_O) {
             System.out.print("Player O");
+        } else {
+            System.out.print("No Player");
         }
-
-        GridPane tictactoegrid = new GridPane();
-        ticTacToe.displayGametable(tictactoegrid);
-        gametable.getChildren().add(tictactoegrid);
     }
 }
