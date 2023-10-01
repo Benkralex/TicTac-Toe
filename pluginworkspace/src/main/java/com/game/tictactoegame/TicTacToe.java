@@ -1,5 +1,8 @@
 package com.game.tictactoegame;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -19,11 +22,22 @@ public class TicTacToe {
         xlength = x;
         ylength = y;
         this.wincause = wincause;
+        init();
     }
     public TicTacToe(int x, int y) {
         gametable = new int[x][y];
         xlength = x;
         ylength = y;
+        init();
+    }
+    private void init() {
+        for (int x = 0; x < xlength; x++) {
+            for (int y = 0; y < ylength; y++) {
+                if (gametable[x][y] != PLAYER_O || gametable[x][y] != PLAYER_X) {
+                    gametable[x][y] = NO_PLAYER;
+                }
+            }
+        }
     }
     public int[][] getGametable() {
         return this.gametable;
@@ -41,13 +55,14 @@ public class TicTacToe {
         for (int x = 0; x < xlength; x++) {
             for(int y = 0; y < ylength; y++) {
                 Text t = new Text();
+                Hyperlink h = new Hyperlink();
                 String i;
                 if (gametable[x][y] == TicTacToe.PLAYER_X) {
                     i = " X ";
                 } else if (gametable[x][y] == TicTacToe.PLAYER_O) {
                     i = " O ";
                 } else {
-                    i = "   ";
+                    i = " -  ";
                 }
                 t.setText(i);
                 gridPane.add(t, x, y);

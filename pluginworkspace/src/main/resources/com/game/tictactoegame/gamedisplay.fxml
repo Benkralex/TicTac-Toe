@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 
@@ -8,4 +9,7 @@
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
+   <children>
+      <Button mnemonicParsing="false" text="Button" />
+   </children>
 </AnchorPane>

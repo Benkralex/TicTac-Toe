@@ -35,9 +35,6 @@ public class Main extends Application {
     @FXML
     private void initialize(){
         ticTacToe = new TicTacToe(3, 3);
-        ticTacToe.setGametable(0,2,TicTacToe.PLAYER_O);
-        ticTacToe.setGametable(1, 1, TicTacToe.PLAYER_O);
-        ticTacToe.setGametable(2, 0, TicTacToe.PLAYER_O);
 
         GridPane tictactoegrid = new GridPane();
         tictactoegrid.setGridLinesVisible(true);
