@@ -1,7 +1,9 @@
 package com.game.tictactoegame;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -64,6 +66,15 @@ public class TicTacToe {
                     i = " -  ";
                 }
                 t.setText(i);
+                t.setId(x + "," + y);
+                t.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent e) {
+                            System.out.println("click");
+                        }
+                    };
+                });
                 gridPane.add(t, x, y);
             }
         }
