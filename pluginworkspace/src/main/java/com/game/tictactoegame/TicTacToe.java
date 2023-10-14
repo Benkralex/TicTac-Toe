@@ -1,14 +1,9 @@
 package com.game.tictactoegame;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-
-import java.util.HashMap;
 
 public class TicTacToe {
     private int[][] gametable;
@@ -18,18 +13,25 @@ public class TicTacToe {
     public static final int PLAYER_X = 1;
     public static final int PLAYER_O = 2;
     public static final int NO_PLAYER = 0;
+    public static int onMove = PLAYER_X;
+    public AnchorPane gametableap;
+    public GridPane wingp;
 
-    public TicTacToe(int x, int y, int wincause) {
+    public TicTacToe(AnchorPane gametableap, GridPane wingp, int x, int y, int wincause) {
         gametable = new int[x][y];
         xlength = x;
         ylength = y;
         this.wincause = wincause;
+        this.gametableap = gametableap;
+        this.wingp = wingp;
         init();
     }
-    public TicTacToe(int x, int y) {
+    public TicTacToe(AnchorPane gametableap, GridPane wingp, int x, int y) {
         gametable = new int[x][y];
         xlength = x;
         ylength = y;
+        this.gametableap = gametableap;
+        this.wingp = wingp;
         init();
     }
     private void init() {
@@ -53,6 +55,10 @@ public class TicTacToe {
         gametable[x][y] = value;
     }
 
+    public int getField(int x, int y) {
+        return gametable[x][y];
+    }
+
     public void displayGametable(GridPane gridPane) {
         for (int x = 0; x < xlength; x++) {
             for(int y = 0; y < ylength; y++) {
@@ -63,21 +69,30 @@ public class TicTacToe {
                 } else if (gametable[x][y] == TicTacToe.PLAYER_O) {
                     i = " O ";
                 } else {
-                    i = " -  ";
+                    i = "   ";
                 }
                 t.setText(i);
                 t.setId(x + "," + y);
-                t.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            System.out.println("click");
-                        }
-                    };
-                });
+                //t.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {MousClickEvent.onClick();});
+                t.<MouseEvent>addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {System.out.println("Clicked!"); MousClickEvent.onClick(t, this, wingp);});
                 gridPane.add(t, x, y);
             }
         }
+    }
+
+    public void displayWin() {
+        Text t = new Text();
+        GridPane label = new GridPane();
+
+        if (this.isWin() == TicTacToe.PLAYER_X) {
+            t.setText("Player X");
+        } else if (this.isWin() == TicTacToe.PLAYER_O) {
+            t.setText("Player O");
+        } else {
+            t.setText("No Player");
+        }
+        label.add(t, 0, 0);
+        gametableap.getChildren().add(label);
     }
 
     public int isWin() {
@@ -173,5 +188,17 @@ public class TicTacToe {
             io = 0;
         }
         return returnvar;
+    }
+
+    public boolean isSomeoneWinning() {
+        if (this.isWin() == PLAYER_O) {
+            return true;
+        } else if (this.isWin() == PLAYER_X) {
+            return true;
+        } else if (this.isWin() == NO_PLAYER) {
+            return false;
+        } else {
+            return false;
+        }
     }
 }
