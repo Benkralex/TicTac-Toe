@@ -1,1 +1,6 @@
 .idea
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/TicTac-Toe.iml
