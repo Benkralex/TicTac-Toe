@@ -8,8 +8,8 @@ import javafx.scene.text.Text;
 public class TicTacToe {
     private int[][] gametable;
     private int wincause = 3;
-    private int xlength;
-    private int ylength;
+    public int xlength;
+    public int ylength;
     public static final int PLAYER_X = 1;
     public static final int PLAYER_O = 2;
     public static final int NO_PLAYER = 0;
@@ -73,26 +73,26 @@ public class TicTacToe {
                 }
                 t.setText(i);
                 t.setId(x + "," + y);
-                //t.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {MousClickEvent.onClick();});
-                t.<MouseEvent>addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {System.out.println("Clicked!"); MousClickEvent.onClick(t, this, wingp);});
+                t.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {MousClickEvent.onClick(t, this, wingp, gridPane);});
                 gridPane.add(t, x, y);
             }
         }
     }
 
-    public void displayWin() {
+    public GridPane displayWin() {
         Text t = new Text();
-        GridPane label = new GridPane();
+        GridPane label = wingp;
 
         if (this.isWin() == TicTacToe.PLAYER_X) {
             t.setText("Player X");
         } else if (this.isWin() == TicTacToe.PLAYER_O) {
             t.setText("Player O");
         } else {
-            t.setText("No Player");
+            t.setText("");
         }
+        label.getChildren().removeAll();
         label.add(t, 0, 0);
-        gametableap.getChildren().add(label);
+        return label;
     }
 
     public int isWin() {

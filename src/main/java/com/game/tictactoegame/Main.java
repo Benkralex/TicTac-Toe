@@ -44,6 +44,6 @@ public class Main extends Application {
         ticTacToe.displayGametable(tictactoegrid);
         gametable.getChildren().add(tictactoegrid);
 
-        ticTacToe.displayWin();
+        gametable.getChildren().add(ticTacToe.displayWin());
     }
 }
